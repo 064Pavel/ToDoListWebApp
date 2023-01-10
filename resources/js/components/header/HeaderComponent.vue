@@ -18,12 +18,12 @@ export default {
         width: 100%;
         height: 12vh;
         padding: 20px;
+        margin-bottom: 5vh;
         background-color: lightseagreen;
     }
 
     .header-content{
         text-align: center;
     }
-
 
 </style>
