@@ -6,22 +6,48 @@
             </div>
         </div>
         <div class="registration-content">
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <input type="password" placeholder="Password confirmation">
+            <input v-model="name" type="text" placeholder="Name">
+            <input v-model="email" type="email" placeholder="Email">
+            <input v-model="password" type="password" placeholder="Password">
+            <input v-model="password_confirmation" type="password" placeholder="Password confirmation">
             <div class="login-link">
                 <p>Do you already have an account?</p>
                 <p><router-link :to="{ name: 'user.login' }">Log in</router-link></p>
             </div>
-            <input class="register-submit" type="submit" value="Sign up">
+            <input @click.prevent="register" class="register-submit" type="submit" value="Sign up">
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Registration"
+    name: "Registration",
+
+    data(){
+        return{
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: ''
+        }
+    },
+
+    methods: {
+        register(){
+
+            axios.get('/sanctum/csrf-cookie')
+                .then(response => {
+                    axios.post('/register', {
+                        name: this.name,
+                        email: this.email,
+                        password: this.password,
+                        password_confirmation: this.password_confirmation})
+                        .then(response => {
+                            console.log(response.data);
+                        })
+                })
+        }
+    }
 }
 </script>
 

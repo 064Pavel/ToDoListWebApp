@@ -19,3 +19,5 @@ Route::get('{page}', [AppController::class, 'app'])->where('page', '.*');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
