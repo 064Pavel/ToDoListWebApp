@@ -7,6 +7,10 @@
             <input type="email" placeholder="Email">
             <input type="password" placeholder="Password">
             <input class="login-submit" type="submit" value="Sign in">
+            <div class="registration-link">
+                <p>Don't you have an account yet?</p>
+                <p><router-link :to="{ name: 'user.registration' }">Register</router-link></p>
+            </div>
         </div>
     </div>
 </template>

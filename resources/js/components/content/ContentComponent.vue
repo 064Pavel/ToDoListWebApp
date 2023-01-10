@@ -2,8 +2,6 @@
     <div class="content-container">
 
         <div class="content">
-            <router-link :to="{ name: 'user.login' }">Login</router-link>
-            <router-link :to="{ name: 'user.registration' }">Registration</router-link>
             <router-view></router-view>
         </div>
 
