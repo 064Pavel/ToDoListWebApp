@@ -1,12 +1,10 @@
 <template>
-    <div>
-        Index !!!!
-    </div>
+    Login 1
 </template>
 
 <script>
 export default {
-    name: "Index"
+    name: "Login"
 }
 </script>
 

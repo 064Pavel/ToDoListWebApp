@@ -10,8 +10,7 @@
 </head>
 <body>
     <div id="app">
-        11111111
-        <index></index>
+        <App></App>
     </div>
 </body>
 </html>

@@ -1,10 +1,10 @@
 import './bootstrap';
 
 import {createApp} from "vue/dist/vue.esm-bundler";
-import Index from "./components/Index.vue"
+import App from "./components/App.vue"
 import router from './router'
 
-const app = createApp(Index)
+const app = createApp(App)
 
 app.use(router)
 
