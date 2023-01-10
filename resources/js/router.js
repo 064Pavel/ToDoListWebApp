@@ -1,4 +1,3 @@
-
 import {createRouter, createWebHistory} from "vue-router";
 
 const router = createRouter({
@@ -17,7 +16,38 @@ const router = createRouter({
             component: () => import('./components/content/auth/Registration.vue')
         },
 
+        {
+            path: '/tasks',
+            name: 'tasks',
+            component: () => import('./components/content/tasks/Index.vue')
+        }
+
     ]
+})
+
+
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem('x_xsrf_token')
+
+    if (!token) {
+        if (to.name === 'user.login' || to.name === 'user.registration') {
+            return next()
+        } else {
+            return next({
+                name: 'user.login'
+            })
+        }
+    }
+
+
+    if (to.name === 'user.login' || to.name === 'user.registration' && token) {
+        return next({
+            name: 'tasks'
+        })
+    }
+
+    next()
+
 })
 
 export default router

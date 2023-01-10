@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import router from "../../../router";
+
 export default {
     name: "Login",
 
@@ -32,9 +34,10 @@ export default {
             axios.get('/sanctum/csrf-cookie')
                 .then(response => {
                     console.log(this.email, this.password);
+                    localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
                     axios.post('/login', {email: this.email, password: this.password})
                     .then(response => {
-                        console.log(response);
+                        router.push({name: 'tasks'})
                     })
             })
         }

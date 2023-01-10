@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import router from "../../../router";
+
 export default {
     name: "Registration",
 
@@ -43,7 +45,9 @@ export default {
                         password: this.password,
                         password_confirmation: this.password_confirmation})
                         .then(response => {
-                            console.log(response.data);
+
+                            localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
+                            router.push({name: 'tasks'})
                         })
                 })
         }
