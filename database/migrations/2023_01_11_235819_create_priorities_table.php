@@ -13,20 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('priorities', function (Blueprint $table) {
             $table->id();
-
             $table->string('title');
-            $table->text('notes')->nullable();
-            $table->date('date')->default(today());
-            $table->boolean('is_done')->default(false);
-
-            $table->unsignedBigInteger('user_id');
-            $table->integer('priority_id')->default(1);
-
-
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -37,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('priorities');
     }
 };
