@@ -10,4 +10,10 @@ class Task extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $guarded = false;
+
+    public function priority(){
+        return $this->hasOne(Priority::class, 'id', 'priority_id');
+    }
 }

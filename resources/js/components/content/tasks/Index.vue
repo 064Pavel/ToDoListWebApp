@@ -2,6 +2,9 @@
     <div v-if="token">
         <p><a @click.prevent="logout">Logout</a></p>
     </div>
+    <div v-for="task in tasks">
+        {{task.title}}
+    </div>
 </template>
 
 <script>
@@ -12,7 +15,8 @@ export default {
 
     data(){
         return{
-            token: null
+            token: null,
+            tasks: []
         }
     },
 
@@ -24,7 +28,9 @@ export default {
     methods:{
         getTasks(){
             axios.get('/api/tasks')
-                .then(response => console.log(response.data))
+                .then(response => {
+                    this.tasks = response.data.data
+                })
         },
 
         getToken(){
