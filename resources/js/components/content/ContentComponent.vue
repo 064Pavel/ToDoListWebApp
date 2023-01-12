@@ -2,7 +2,7 @@
     <div class="content-container">
 
         <div class="content">
-            <router-view></router-view>
+            <router-view :key="$route.fullPath"></router-view>
         </div>
 
     </div>
@@ -30,10 +30,10 @@ export default {
     }
 
     .content{
-        position: absolute;
-        top: 25%;
+        position: relative;
+        top: 40%;
         left: 50%;
-        transform: translate(-50%, 0);
+        transform: translate(-50%, -50%);
 
         background-color: white;
         padding: 30px;

@@ -20,6 +20,12 @@ const router = createRouter({
             path: '/tasks',
             name: 'tasks',
             component: () => import('./components/content/tasks/Index.vue')
+        },
+
+        {
+            path: '/statistic',
+            name: 'statistic',
+            component: () => import('./components/statistic/StatisticComponent.vue')
         }
 
     ]
