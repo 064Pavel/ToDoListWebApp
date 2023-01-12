@@ -4,7 +4,6 @@
         <menu-component></menu-component>
     </div>
     <content-component></content-component>
-    <router-view :key="$route.fullPath"></router-view>
 </template>
 
 <script>

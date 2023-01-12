@@ -23,7 +23,7 @@ export default {
 <style scoped>
     .content-container{
         width: 100%;
-        height: 100vh;
+        height: 150vh;
 
         padding: 20px;
         background-color: lightseagreen;
