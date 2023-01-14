@@ -38,8 +38,7 @@ export default {
                     // localStorage.setItem('user_id', response)
                     axios.post('/login', {email: this.email, password: this.password})
                     .then(response => {
-                        console.log(response);
-                        // router.push({name: 'tasks'})
+                        router.push({name: 'tasks'})
                     })
             })
         }

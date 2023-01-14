@@ -1,6 +1,10 @@
 <template>
     <div class="tasks" v-for="task in tasks">
 
+        <div :class="showModal(task.id) ? '' : 'hidden'">
+            <task-modal ref="taskModal" :task="task" :closeModal="closeModal"></task-modal>
+        </div>
+
         <div class="task"
              v-bind:class="{
             'not':task.priority_id === 1,
@@ -24,7 +28,7 @@
                 </div>
 
                 <div class="task_info_section_2">
-                    <strong>+</strong>
+                    <strong @click="changeModalTaskid(task.id)">+</strong>
                 </div>
 
             </div>
@@ -33,22 +37,24 @@
     </div>
 
 
-    <create></create>
+    <create v-show="modalTaskId === null"></create>
 </template>
 
 <script>
 import Create from "./Create.vue";
+import TaskModal from "./TaskModal.vue";
 
 export default {
     name: "Index",
 
     components:{
-        Create
+        Create, TaskModal
     },
 
     data() {
         return {
             tasks: [],
+            modalTaskId: null
         }
     },
 
@@ -71,10 +77,22 @@ export default {
 
                     this.getTasks()
                 })
+        },
+
+        changeModalTaskid(id){
+          this.modalTaskId = id
+            console.log(id)
+        },
+
+        showModal(id) {
+            return this.modalTaskId === id
+        },
+        closeModal() {
+            this.modalTaskId = null;
         }
 
-
     }
+
 }
 </script>
 
@@ -104,6 +122,9 @@ export default {
     border-left: 8px solid red;
 }
 
+.hidden{
+    display: none;
+}
 
 .task_info_section_1 {
     display: flex;
