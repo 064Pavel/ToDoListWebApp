@@ -64,4 +64,8 @@ export default {
         font-size: 22px;
     }
 
+    .menu div strong{
+        color: black;
+    }
+
 </style>

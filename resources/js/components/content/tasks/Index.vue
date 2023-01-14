@@ -1,5 +1,6 @@
 <template>
     <div class="tasks" v-for="task in tasks">
+
         <div class="task"
              v-bind:class="{
             'not':task.priority_id === 1,
@@ -7,11 +8,13 @@
             'middle':task.priority_id === 3,
             'high':task.priority_id === 4,
         }">
+
             <div class="task_info">
+
                 <div class="task_info_section_1">
 
-                    <div class="task_info_delete">
-                        <input type="checkbox">
+                    <div class="task_info_complete">
+                        <span><a @click.prevent="closeTask(task.id)" href="#">	&#9989;</a></span>
                     </div>
 
                     <div class="task_info_title">
@@ -45,7 +48,7 @@ export default {
 
     data() {
         return {
-            tasks: []
+            tasks: [],
         }
     },
 
@@ -60,6 +63,15 @@ export default {
                     this.tasks = response.data.data
                 })
         },
+
+        closeTask(id){
+            console.log(this.is_done);
+            axios.patch(`/api/close/${id}`)
+                .then(response => {
+
+                    this.getTasks()
+                })
+        }
 
 
     }
@@ -112,5 +124,15 @@ export default {
 .task_info div {
 
     margin-right: 2vh;
+}
+
+.task_info_complete{
+    padding-right: 12px;
+    border-right: 2px solid black;
+}
+
+.task_info_complete span a{
+    text-decoration: none;
+    color: black;
 }
 </style>

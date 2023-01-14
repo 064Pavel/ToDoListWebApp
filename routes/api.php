@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskActionController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,5 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //for TaskController
 Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::resource('/tasks', TaskController::class);
+    Route::patch('/close/{task}',  [TaskActionController::class, 'closeTask']);
 });
 

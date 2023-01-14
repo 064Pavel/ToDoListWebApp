@@ -23,7 +23,7 @@ class TaskFactory extends Factory
             'notes' => fake()->text(30),
             'date' => fake()->date,
 
-            'user_id' => User::get()->random()->id,
+            'user_id' => 3/*User::get()->random()->id*/,
             'priority_id' => Priority::get()->random()->id
         ];
     }

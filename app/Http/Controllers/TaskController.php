@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +13,16 @@ class TaskController extends Controller
 
     public function index()
     {
-        $tasks = Task::with('priority')->get()->where('user_id', Auth::id());
+        $tasks = Task::with('priority')->get()->where('user_id', Auth::id())->where('is_done', 0);
 
         return TaskResource::collection($tasks);
     }
 
+    public function create(){
+        $user_id = Auth::id();
+
+        return $user_id;
+    }
 
 
     public function store(StoreRequest $request)
@@ -73,4 +77,5 @@ class TaskController extends Controller
     {
         //
     }
+
 }

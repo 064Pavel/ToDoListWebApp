@@ -18,8 +18,12 @@ export default {
     data(){
         return{
             title: '',
-            user_id: 3
+            user_id: null
         }
+    },
+
+    mounted() {
+        this.getUserId()
     },
 
     methods:{
@@ -28,6 +32,16 @@ export default {
             axios.post('/api/tasks', {title: this.title, user_id: this.user_id})
                 .then(response => {
                     this.$parent.getTasks()
+                    this.title = ''
+
+                })
+        },
+
+        getUserId(){
+
+            axios.get('/api/tasks/create')
+                .then(response => {
+                    this.user_id = response.data;
                 })
         }
     }
