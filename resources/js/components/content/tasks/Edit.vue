@@ -6,7 +6,7 @@
             <input v-model="title" type="text" placeholder="New title">
             <div>Priority:
                 <select v-model="priority_id">
-                    <option :value="priority.id" v-for="priority in priorities">{{priority.title}}</option>
+                    <option :value="priority.id" v-for="priority in priorities">{{ priority.title }}</option>
                 </select>
             </div>
             <div class="date">
@@ -39,12 +39,23 @@
     </section>
 
     <div class="btn-section">
-        <div class="back">
-            <button @click="changeModal">Back</button>
+
+
+        <div class="btn-section-down">
+            <div class="back">
+                <button @click="changeModal">Back</button>
+            </div>
+            <div class="delete">
+                <button @click="destroy(task.id)">Delete</button>
+            </div>
+
         </div>
+
+
         <div class="update">
             <button @click="update(task.id)">Update</button>
         </div>
+
     </div>
 </template>
 
@@ -52,8 +63,8 @@
 export default {
     name: "Edit",
 
-    data(){
-        return{
+    data() {
+        return {
             priorities: [],
 
             title: '',
@@ -72,38 +83,45 @@ export default {
         this.getUserId()
     },
 
-    methods:{
+    methods: {
 
-        update(id){
+        update(id) {
             console.log(this.title, this.notes, this.date, this.is_done, this.user_id, this.priority_id);
 
             axios.patch(`/api/tasks/${id}`, {
-              title: this.title,
-              notes: this.notes,
-              date: this.date,
-              is_done: this.is_done,
-              user_id: this.user_id,
-              priority_id: this.priority_id
-          })
-              .then(response => {
-                  console.log(response);
-                  this.closeModal()
-                  this.getTasks()
-              })
+                title: this.title,
+                notes: this.notes,
+                date: this.date,
+                is_done: this.is_done,
+                user_id: this.user_id,
+                priority_id: this.priority_id
+            })
+                .then(response => {
+                    console.log(response);
+                    this.closeModal()
+                    this.getTasks()
+                })
         },
 
-        getPriorities(){
-            axios.get('/api/priorities').
-                then(response => {
-                    this.priorities = response.data.data
+        getPriorities() {
+            axios.get('/api/priorities').then(response => {
+                this.priorities = response.data.data
             });
         },
 
-        getUserId(){
+        getUserId() {
 
             axios.get('/api/tasks/create')
                 .then(response => {
                     this.user_id = response.data;
+                })
+        },
+
+        destroy(id){
+            axios.delete(`/api/tasks/${id}`)
+                .then(response => {
+                    this.closeModal()
+                    this.getTasks()
                 })
         }
     }
@@ -147,10 +165,10 @@ export default {
     text-align: left;
 }
 
-.notes-textarea{
+.notes-textarea {
     resize: none;
     width: 175px;
-    height: 220px;
+    height: 190px;
     margin-top: 20px;
 }
 
@@ -175,13 +193,26 @@ export default {
     justify-content: space-around;
 }
 
-.update {
+.update, .delete {
     text-align: right;
     margin-right: 40px;
 }
 
+.delete {
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
 .update button, .back button {
     background-color: lightseagreen;
+    width: 120px;
+    height: 30px;
+    border: none;
+    font-size: 24px;
+}
+
+.delete button {
+    background-color: red;
     width: 120px;
     height: 30px;
     border: none;
