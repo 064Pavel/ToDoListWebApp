@@ -39,14 +39,14 @@
         </div>
     </section>
 
-    <div class="link-edit"><button>Edit</button></div>
+    <div class="link-edit"><button @click="changeModal">Edit</button></div>
 </template>
 
 <script>
 export default {
     name: "Show",
 
-    props:['task', 'closeModal'],
+    props:['task', 'closeModal', 'changeModal'],
 
 
 

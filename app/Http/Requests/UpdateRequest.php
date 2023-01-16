@@ -24,6 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'title' => '',
             'notes' => '',
             'date' => '',
             'is_done' => '',

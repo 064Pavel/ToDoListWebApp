@@ -2,7 +2,7 @@
     <div class="tasks" v-for="task in tasks">
 
         <div :class="showModal(task.id) ? '' : 'hidden'">
-            <task-modal ref="taskModal" :task="task" :closeModal="closeModal"></task-modal>
+            <task-modal ref="taskModal" :getTasks="getTasks" :task="task" :closeModal="closeModal"></task-modal>
         </div>
 
         <div class="task"

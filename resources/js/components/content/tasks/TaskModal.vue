@@ -2,7 +2,12 @@
     <transition name="modal-fade">
         <div class="modal-backdrop">
             <div class="modal">
-                <show v-show="modalComponent === 'show'" :task="task" :closeModal="closeModal"></show>
+                <div v-show="modalComponent">
+                    <show :task="task" :changeModal = "changeModal" :closeModal="closeModal"></show>
+                </div>
+                <div v-show="!modalComponent">
+                    <edit :getTasks="getTasks" :task="task" :changeModal = "changeModal" :closeModal="closeModal"></edit>
+                </div>
             </div>
         </div>
     </transition>
@@ -10,21 +15,25 @@
 
 <script>
 import Show from "./Show.vue";
+import Edit from "./Edit.vue";
+
 export default {
     name: "TaskModal",
 
-    components:{Show},
+    components:{Show, Edit},
 
-    props: ['task', 'closeModal'],
+    props: ['task', 'closeModal', 'getTasks'],
 
     data(){
         return{
-            modalComponent: 'show'
+            modalComponent: true
         }
     },
 
     methods:{
-
+        changeModal(){
+            this.modalComponent = !this.modalComponent
+        }
     }
 
 

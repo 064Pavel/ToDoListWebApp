@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\TaskActionController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
@@ -24,5 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::resource('/tasks', TaskController::class);
     Route::patch('/close/{task}',  [TaskActionController::class, 'closeTask']);
+    Route::get('/priorities', [PriorityController::class, 'index']);
 });
 
